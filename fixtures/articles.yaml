@@ -1,0 +1,7 @@
+#App\Entity\Users:
+#App\Entity\Articles:
+#  articles{1..200}:
+#    title: '<word(4)>'
+#    description: '<paragraph(4)>'
+#    created_at: '<dateTime()>'
+#    user_id: '@users*'
