@@ -1,0 +1,6 @@
+App\Entity\Article:
+  article{1..200}:
+    user: '@user*'
+    title: '<word()>'
+    content: '<paragraph()>'
+    createdAt: '<datetime()>'

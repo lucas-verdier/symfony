@@ -1,5 +1,5 @@
-App\Entity\Users:
-  users{1..50}:
+App\Entity\User:
+  user{1..50}:
     email: '<email()>'
     firstname: '<firstName()>'
     lastname: '<lastName()>'
