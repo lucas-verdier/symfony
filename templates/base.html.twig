@@ -23,23 +23,27 @@
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                     <img src="./public/assets/images/logo_blog_symfony.png" alt="logo blog orange">
                 </a>
-
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="{{ path('app_home') }}" class="nav-link px-2 text-secondary">Home</a></li>
                     <li><a href="{{ path('app_articles') }}" class="nav-link px-2 text-white">Articles</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+{#                    <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>#}
+{#                    <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>#}
                     <li><a href="#" class="nav-link px-2 text-white">About</a></li>
                 </ul>
 
 {#                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">#}
 {#                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">#}
 {#                </form>#}
-
+                {% if app.user %}
                 <div class="text-end">
-                    <button href="{{ path('app_login') }}" type="button" class="btn btn-outline-light me-2">Login</button>
-                    <button href='{{ path('app_register') }}' type="button" class="btn btn-warning">Sign-up</button>
+                    <a href='{{ path('app_logout') }}' type="button" class="btn btn-warning">Log-out</a>
                 </div>
+                {% else %}
+                <div class="text-end">
+                    <a href="{{ path('app_login') }}" type="button" class="btn btn-outline-light me-2">Login</a>
+                    <a href='{{ path('app_register') }}' type="button" class="btn btn-warning">Sign-up</a>
+                </div>
+                {% endif %}
             </div>
         </div>
     </header>

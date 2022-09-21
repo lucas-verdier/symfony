@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article : {{ article.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ article.title }}</h1>
+    <p>Rédigé par : {{ article.user.firstname }} {{ article.user.lastname }} | Le : {{ article.createdAt | date('d-m-Y') }}</p>
+    <p>{{ article.content }}</p>
+    <a href="{{ path('app_articles') }}">Revenir en arrière</a>
+{% endblock %}
