@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use Doctrine\DBAL\Types\TextType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Id;
@@ -12,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Form\ArticlesFormType;
+use App\Form\CommentType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,15 +40,35 @@ class ArticlesController extends AbstractController
     }
 
     #[Route('/articles/{id}', name: 'app_article_detail')]
-    public function detailArticle(ManagerRegistry $doctrine, int $id): Response
+    public function detailArticle(ManagerRegistry $doctrine, int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $repository = $doctrine->getRepository(Article::class);
-        $articles = $repository->findOneBy(['id' => $id]);
+        $repositoryArticle = $doctrine->getRepository(Article::class);
+        $articles = $repositoryArticle->findOneBy(['id' => $id]);
 
-//        dd($articles);
+
+        $repositoryComment = $doctrine->getRepository(Comment::class);
+        $comments = $repositoryComment->findBy(['id' => $id], ['createdAt' => 'DESC']);
+
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid() && $this->getUser()) {
+            $comment->setUser($this->getUser());
+            $comment->setCreatedAt(new \DateTime('now'));
+            $comment->setArticle($articles);
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+//            return $this->redirectToRoute('app_article_detail';
+        }
+
 
         return $this->render('articles/detail.html.twig', [
                 'article' => $articles,
+                'comments' => $comments,
+                'commentsForm' => $form->createView(),
         ]);
 
     }
