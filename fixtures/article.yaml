@@ -4,3 +4,4 @@ App\Entity\Article:
     title: '<word()>'
     content: '<paragraph()>'
     createdAt: '<datetime()>'
+    images: 'forest-symfony.jpg'

@@ -47,8 +47,8 @@ class ArticlesController extends AbstractController
 
 
         $repositoryComment = $doctrine->getRepository(Comment::class);
-        $comments = $repositoryComment->findBy(['id' => $id], ['createdAt' => 'DESC']);
-
+        $comments = $repositoryComment->findBy(['article' => $id], ['createdAt' => 'DESC']);
+//        dd($comments);
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -61,7 +61,7 @@ class ArticlesController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
-//            return $this->redirectToRoute('app_article_detail';
+            return $this->redirectToRoute('app_article_detail', ['id' => $id]);
         }
 
 
