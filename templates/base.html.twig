@@ -37,6 +37,7 @@
 {#                </form>#}
                 {% if app.user %}
                 <div class="text-end">
+                    <a href="{{ path('app_article_create') }}" type="button" class="btn btn-outline-light me-2">Ajouter</a>
                     <a href='{{ path('app_logout') }}' type="button" class="btn btn-warning">Log-out</a>
                 </div>
                 {% else %}

@@ -39,7 +39,7 @@ class ArticlesController extends AbstractController
         ]);
     }
 
-    #[Route('/articles/{id}', name: 'app_article_detail')]
+    #[Route('/articles/id={id}', name: 'app_article_detail')]
     public function detailArticle(ManagerRegistry $doctrine, int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $repositoryArticle = $doctrine->getRepository(Article::class);

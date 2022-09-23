@@ -14,10 +14,10 @@
                     <p>{{ article.content }}</p>
                     <p>Auteur: {{ article.user.firstname }} {{ article.user.lastname }}</p>
                     <p>Posté le : {{ article.createdAt | date('d-m-Y')}}</p>
-                    <a href="/articles/{{ article.id }}">Lien vers l'article</a>
+                    <a href="/articles/id={{ article.id }}">Lien vers l'article</a>
                 </div>
                 <div>
-                    <img class="img-display-article" src="/assets/upload/{{ article.images }}">
+                    <img class="img-display-article" src="/assets/upload/{{ article.images }}"/>
                 </div>
             </article>
         {% endfor %}
