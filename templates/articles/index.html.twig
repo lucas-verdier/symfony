@@ -9,11 +9,16 @@
     <div class="articles-container">
         {% for article in allArticles %}
             <article>
-                <h1>{{ article.title }}</h1>
-                <p>{{ article.content }}</p>
-                <p>Auteur: {{ article.user.firstname }} {{ article.user.lastname }}</p>
-                <p>Posté le : {{ article.createdAt | date('d-m-Y')}}</p>
-                <a href="/articles/{{ article.id }}">Lien vers l'article</a>
+                <div>
+                    <h1>{{ article.title }}</h1>
+                    <p>{{ article.content }}</p>
+                    <p>Auteur: {{ article.user.firstname }} {{ article.user.lastname }}</p>
+                    <p>Posté le : {{ article.createdAt | date('d-m-Y')}}</p>
+                    <a href="/articles/{{ article.id }}">Lien vers l'article</a>
+                </div>
+                <div>
+                    <img class="img-display-article" src="/assets/upload/{{ article.images }}">
+                </div>
             </article>
         {% endfor %}
     </div>
