@@ -1,25 +1,36 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/css/articles/detail.css">
+{% endblock %}
+
 {% block title %}Article : {{ article.title }}{% endblock %}
-
 {% block body %}
-    <h1>{{ article.title }}</h1>
-    <p>Rédigé par : {{ article.user.firstname }} {{ article.user.lastname }} | Le : {{ article.createdAt | date('d-m-Y') }}</p>
-    <p>{{ article.content }}</p>
-    <img src="/assets/upload{{ article.images }}" alt="photo d'une foret">
-    <a href="{{ path('app_articles') }}">Revenir en arrière</a>
+    <section class="section-detail-article">
+        <div class="detail-article-container">
+            <h1>{{ article.title }}</h1>
+            <p>Rédigé par : {{ article.user.firstname }} {{ article.user.lastname }} | Le : {{ article.createdAt | date('d-m-Y') }}</p>
+            <p>{{ article.content }}</p>
+            <img class="img-detail-article" src="/assets/upload/{{ article.images }}">
+            <a href="{{ path('app_articles') }}">Revenir en arrière</a>
+        </div>
 
-    <h2>Commentaires :</h2>
-    {% for com in comments  %}
-        <h5>{{ com.user.firstname }} {{ com.user.lastname }}</h5>
-        <p>Le : {{ com.createdAt | date('d-m-Y H:i') }}</p>
-        <p>{{ com.content }}</p>
-    {% endfor %}
+        <div class="display-com-container">
+            <h2>Commentaires :</h2>
+            {% for com in comments  %}
+                <h5>{{ com.user.firstname }} {{ com.user.lastname }}</h5>
+                <p>Le : {{ com.createdAt | date('d-m-Y H:i') }}</p>
+                <p>{{ com.content }}</p>
+            {% endfor %}
+        </div>
 
-    <h2>Ajout de commentaire :</h2>
-    {{ form_start(commentsForm) }}
-    {{ form_row(commentsForm.content) }}
+        <div class="form-com-container">
+            <h2>Ajout de commentaire :</h2>
+            {{ form_start(commentsForm) }}
+            {{ form_row(commentsForm.content) }}
 
-    <button type="submit" class="btn">Post</button>
+            <button type="submit" class="btn-post-com">Post</button>
+    </section>
     {{ form_end(commentsForm) }}
+    </div>
 {% endblock %}
